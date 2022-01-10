@@ -216,6 +216,21 @@ func (mr *MockProductServiceInterfaceMockRecorder) Get(id interface{}) *gomock.C
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockProductServiceInterface)(nil).Get), id)
 }
 
+// Update mocks base method.
+func (m *MockProductServiceInterface) Update(id, name string, price float64) (application.ProductInterface, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Update", id, name, price)
+	ret0, _ := ret[0].(application.ProductInterface)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Update indicates an expected call of Update.
+func (mr *MockProductServiceInterfaceMockRecorder) Update(id, name, price interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockProductServiceInterface)(nil).Update), id, name, price)
+}
+
 // MockProductReader is a mock of ProductReader interface.
 type MockProductReader struct {
 	ctrl     *gomock.Controller
