@@ -33,6 +33,30 @@ func (s *ProductService) Create(name string, price float64) (ProductInterface, e
 	return result, nil
 }
 
+func (s *ProductService) Update(id string, name string, price float64) (ProductInterface, error) {
+	product, err := s.Persistence.Get(id)
+	if err != nil {
+		return nil, err
+	}
+
+	productUpdate := NewProduct()
+	productUpdate.ID = product.GetID()
+	productUpdate.Name = name
+	productUpdate.Price = price
+	productUpdate.Status = product.GetStatus()
+
+	_, err = productUpdate.IsValid()
+	if err != nil {
+		return &Product{}, err
+	}
+
+	result, err := s.Persistence.Save(productUpdate)
+	if err != nil {
+		return &Product{}, err
+	}
+	return result, nil
+}
+
 func (s *ProductService) Enable(product ProductInterface) (ProductInterface, error) {
 	err := product.Enable()
 	if err != nil {
